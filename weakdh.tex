@@ -1,0 +1,119 @@
+\pdfminorversion=4
+\documentclass[presentation, aspectratio=54]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\tolerance=1000
+\input{SUTD-dark}
+\usepackage{textgreek}
+\usetheme{default}
+
+\definecolor{orchid}{RGB}{153, 102, 255}
+\newcommand{\cyan}[1]{\textcolor{cyan}{#1}}
+\newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+\newcommand{\purple}[1]{\textcolor{orchid}{#1}}
+
+\author{Asher Toback and Ben Hamlin}
+\date{May 31, 2018}
+\title{Imperfect Forward Secrecy \\ by David Adrian et al.}
+\begin{document}
+
+\maketitle
+\section{Background}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Diffie-Hellman}
+
+\cyan{Alice} and \magenta{Bob} want to do some symmetric crypto. They need a
+shared \purple{key}. But their communication channel is public...
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Diffie-Hellman}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\cyan{Alice} has...
+\begin{itemize}
+\item a private exponent $\cyan{a}$
+\end{itemize}
+\end{column}\hfill
+\begin{column}{0.5\textwidth}
+\magenta{Bob} has...
+\begin{itemize}
+\item a private exponent $\magenta{b}$
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{20pt}
+They share publicly...
+\begin{itemize}
+\item a prime modulus $p$
+\item a generator $g$ of the subgroup $G \subseteq \mathbb{Z}^*_p$
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Diffie-Hellman}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+Alice publicly sends...
+\[\cyan{A} = g^{\cyan{a}}\]
+\end{column}
+\begin{column}{0.5\textwidth}
+Bob publicly sends...
+\[\magenta{B} = g^{\magenta{b}}\]
+\end{column}
+\end{columns}
+\vspace{20pt}
+Their \purple{key} will be...
+\[\purple{K}
+        = \cyan{A}^{\magenta{b}}
+        = \magenta{B}^{\cyan{a}}
+        = g^{\cyan{a}\magenta{b}}\]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Diffie-Hellman}
+
+An eavesdropper Eve knows...
+\begin{itemize}
+\item the modulus $p$
+\item the generator $g$
+\item $\cyan{A} = g^{\cyan{a}}$
+\item $\magenta{B} = g^{\magenta{b}}$
+\end{itemize}
+She wants $\purple{K} = g^{\cyan{a}\magenta{b}}$. What can she do?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Diffie-Hellman}
+
+Eve can calculate...
+\[\cyan{a} = \log_g \cyan{A}\]
+\[\purple{K} = \magenta{B}^{\cyan{a}}\]
+This takes time $O(|G|^{\frac{1}{2}}) \approx O(2^{\sqrt{p}})$. [CITE HERE]
+
+\end{frame}
+
+\end{document}
