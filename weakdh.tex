@@ -61,7 +61,7 @@ shared \purple{key}. But their communication channel is public...
 \vspace{20pt}
 They share publicly...
 \begin{itemize}
-\item a prime modulus $p$
+\item an $n$-bit prime modulus $p$
 \item a generator $g$ of the subgroup $G \subseteq \mathbb{Z}^*_p$
 \end{itemize}
 
@@ -112,7 +112,7 @@ She wants $\purple{K} = g^{\cyan{a}\magenta{b}}$. What can she do?
 Eve can calculate...
 \[\cyan{a} = \log_g \cyan{A}\]
 \[\purple{K} = \magenta{B}^{\cyan{a}}\]
-This takes time $O(|G|^{\frac{1}{2}}) \approx O(2^{\sqrt{p}})$. [CITE HERE]
+This takes time $O(|G|^{\frac{1}{2}}) \approx O(\sqrt{2^{\log p}})$. [CITE HERE]
 
 \end{frame}
 
