@@ -13,10 +13,11 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{url}
 
 \tolerance=1000
 \input{SUTD-dark}
-\usepackage{textgreek}
+%\usepackage{textgreek}
 \usetheme{default}
 
 \definecolor{orchid}{RGB}{153, 102, 255}
@@ -100,10 +101,22 @@ They conclude that...
 
 \begin{itemize}
 \item Broken crypto is bad, mkay?
-\item Use at least 1024-bit DH. (Use EC-based DH, if possible.)
+\item Pay attention to what security proofs actually prove.
+\item Use at least 1024-bit DH. (Use EC-based DH, if possible. The authors'
+      result only applies to integer DH. EC-based DH is
+      $\text{secure}^{\dagger}$.)
 \item Don't reuse moduli.
 \item Beware of misconfiguration. (Don't roll your own crypto.)
 \end{itemize}
+
+\vspace{20pt}
+{
+\footnotesize
+\pause
+$\dagger$)  Well, $\text{maybe}^{\ddagger}$... \\
+\pause
+$\ddagger$) Well technically, no...
+}
 
 \end{frame}
 
@@ -399,8 +412,9 @@ Browser-Clients
 Non-Browser Clients (such as from a terminal)
 \begin{itemize}
 \item Different time limits on handshake, upon which they kill connection.
-\item However, commands such as $curl$ or $git$ run unattended and thus have
-      long timeouts or none at all. These can be used for hijacking.
+\item However, commands such as \texttt{curl} or \texttt{git} run unattended
+      and thus have long timeouts or none at all. These can be used for
+      hijacking.
 \end{itemize}
 
 \end{frame}
@@ -573,9 +587,7 @@ Cost of 1024-bit DHE precomputation is 45M core years of work.
       to ASICs usage, which would cut down cost by a factor of 80. Thus,
       only cost 100s of millions. 
 \item In 2013 the U.S. Consolidated Cryptologic, which includes NSA, had a
-      budget of \$10.5B. They prioritize investing in ``groundbreaking
-      cryptanalytic capabilities to defeat adversarial cryptography and exploit
-      internet traffic.'' Departments ``cryptanalytic IT services'' Received
+      budget of \$10.5B. Departments ``cryptanalytic IT services'' Received
       budget of \$247M, and ``cryptanalysis and exploitation services program
       C'' received \$360M. 
 \end{itemize}
@@ -696,6 +708,11 @@ Is it possible to construct a honeypot for FBI which could prove that
 they have the ability to break 1024-bit DHE?
 }
 \only<2>{
+\begin{figure}
+\centering
+\includegraphics[width=0.8\columnwidth]{graphics/DLOGalg.png}
+\end{figure}
+
 Quantum precomputation: Could a quantum algorithm be used to efficiently
 generate the prime-logarithm DB, leaving the descent step for a classical
 computer?
@@ -706,6 +723,15 @@ computer?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Questions?}
+
+David Adrian, Karthikeyan Bhargavan, Zakir Durumeric, Pierrick Gaudry, Matthew
+Green, J. Alex Halderman, Nadia Heninger, Drew Springall, Emmanuel Thomé, Luke
+Valenta, Benjamin VanderSloot, Eric Wustrow, Santiago Zanella-Béguelin, and Paul
+Zimmermann. 2015. ``Imperfect Forward Secrecy: How Diffie-Hellman Fails in
+Practice.'' \textit{In Proceedings of the 22nd ACM SIGSAC Conference on Computer
+and Communications Security (CCS '15).} ACM, New York, NY, USA, 5-17. DOI:
+\url{https://doi.org/10.1145/2810103.2813707}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

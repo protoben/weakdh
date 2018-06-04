@@ -9,6 +9,7 @@ all: $(NAME).pdf
 
 $(NAME).pdf: $(NAME).tex $(DEPS)
 	$(LATEX) $<
+	$(LATEX) $<
 
 .PHONY: clean
 clean:
